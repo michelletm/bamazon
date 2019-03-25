@@ -17,9 +17,49 @@ var connection = mysql.createConnection({
 connection.connect(function (err) {
    if (err) throw err;
    console.log("connected as id " + connection.threadId);
-   connection.end();
 
+   connection.query("SELECT * FROM products", function(err, res){
+      if (err) return console.log(err);
+
+      //console.log(res);
+      for(var i = 0; i < res.length; i++) {
+         console.log(res[i].item_id, res[i].product_name, res[i].price);
+      }
+      inquirer.prompt ([
+         {
+            type: "input",
+            name: "askId",
+            message: "Please enter the ID of the item you'd like to purchase"
+
+         },
+         {
+            type: "input",
+            name: "quantity",
+            message: "Please enter the quantity you would like to purchase"
+         }
+      ]).then(function(answer){
+         console.log(answer); 
+         connection.query("SELECT stock_quantity FROM products WHERE ?", 
+         { item_id: answer.askId},
+         function(err, res){
+            if (err) return console.log(err);
+            console.log(res);
+
+            if(res[0].stock_quantity >= answer.quantity) {
+               console.log("Enough stock!");
+               
+            }else {
+               console.log("Sorry, out of stock");
+            }
+            connection.end();
+         })
+         
+      })
+     
+   })
 });
 
+
+   
 
 
