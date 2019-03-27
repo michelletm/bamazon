@@ -4,15 +4,11 @@ var chalk = require("chalk");
 
 console.log(chalk.cyanBright("Bamazon Customer Working"));
 
-
 var connection = mysql.createConnection({
    host: "localhost",
-
    port: 3306,
-
    user: "root",
    password: "password",
-
    database: "bamazon"
 });
 
@@ -31,7 +27,6 @@ connection.connect(function (err) {
             type: "input",
             name: "askId",
             message: "Please enter the ID of the item you'd like to purchase"
-
          },
          {
             type: "input",
@@ -53,10 +48,8 @@ connection.connect(function (err) {
                console.log(chalk.red("Sorry, out of stock"));
             }
             connection.end();
-         })
-         
-      })
-     
+         })   
+      }) 
    })
 });
 

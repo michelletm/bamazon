@@ -25,22 +25,21 @@ connection.connect(function (err) {
       console.log(answer);
 
       if (answer.option === "VIEW PRODUCTS FOR SALE") {
-         console.log("See all products for sale")
+         console.log(chalk.red("See all products for sale"));
          viewProduct(connection)
 
       } else if (answer.option === "VIEW LOW INVENTORY") {
-         console.log("See all products with low inventory")
+         console.log(chalk.red("See all products with low inventory"));
          viewLowInven(connection)
 
       } else if (answer.option === "ADD TO INVENTORY") {
-         console.log("You have chosen to add to inventory")
+         console.log(chalk.red("You have chosen to add to inventory"));
          addInven(connection);
 
       } else if (answer.option === "ADD NEW PRODUCT") {
-         console.log("You have selected 'Add New Product'")
+         console.log(chalk.red("You have selected to add a new product"));
          addProduct(connection);
       }
-      //connection.end();
    })
 })
 
@@ -72,25 +71,26 @@ function addProduct(conn) {
       {
          type: "input",
          name: "product_name",
-         message: "What is the name of the item to add?"
+         message: "Enter the name of the item to add"
       },
       {
          type: "input",
          name: "department_name",
-         message: "What is the category of the item to add?"
+         message: "Enter the category of the item to add"
       },
       {
          type: "input",
          name: "price",
-         message: "What is the price of the item to add?"
+         message: "Enter the price of the item to add"
       },
       {
          type: "input",
          name: "stock_quantity",
-         message: "What is the quantity of the item to add?"
+         message: "Enter quantity of the item to add"
       }
    ]).then(function (answer) {
       console.log(answer);
+      
       conn.query("INSERT INTO products SET ?", answer, function(err,res){
          if (err) return console.log(err);
          console.log(res);
@@ -104,12 +104,12 @@ function addInven (conn) {
       {
          type: "input",
          name: "item_id",
-         message: "Please enter the item ID of the inventory to add"
+         message: "Enter the item ID of the inventory to add"
       },
       {
          type: "input",
          name: "stock_quantity",
-         message: "Please enter the amount of items to add"
+         message: "Enter the amount of items to add"
       }
    ]).then(function(answer) {
       console.log(answer);
@@ -119,6 +119,5 @@ function addInven (conn) {
          console.log(res);
          conn.end();
       })
-
    })
 }
