@@ -9,3 +9,5 @@ A demonstration of the Customer App can be viewed here:
 A demonstration of the Manager App is here: 
 
 A view of the table used, along with the values appended in the demonstrations, can be viewed here:
+
+Help on this project can be found in the documentation of the applicable node package managers. This project is currently maintained only by michelletm, but may expand if further functionalities, like the Supervisor App, are attmpted. 
