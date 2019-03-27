@@ -1,7 +1,9 @@
-console.log("Working")
-
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+var chalk = require("chalk");
+
+console.log(chalk.cyanBright("Bamazon Customer Working"));
+
 
 var connection = mysql.createConnection({
    host: "localhost",
@@ -21,7 +23,6 @@ connection.connect(function (err) {
    connection.query("SELECT * FROM products", function(err, res){
       if (err) return console.log(err);
 
-      //console.log(res);
       for(var i = 0; i < res.length; i++) {
          console.log(res[i].item_id, res[i].product_name, res[i].price);
       }
@@ -46,10 +47,10 @@ connection.connect(function (err) {
             console.log(res);
 
             if(res[0].stock_quantity >= answer.quantity) {
-               console.log("Enough stock!");
+               console.log(chalk.magentaBright("Good news, quantity available!"));
                
             }else {
-               console.log("Sorry, out of stock");
+               console.log(chalk.red("Sorry, out of stock"));
             }
             connection.end();
          })
